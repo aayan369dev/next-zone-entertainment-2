@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Next Zone Entertainment</title>
+<meta name="description" content="Next Zone Entertainment — films, web series, music videos, live events and artist management. Mumbai | Abu Dhabi | Greece.">
+<meta name="theme-color" content="#060504">
+<link rel="icon" href="emblem_sm.webp">
+<script>document.documentElement.className+=" js"</script>
+<link rel="preload" as="image" href="emblem.webp">
+<link rel="preload" as="image" href="wordmark.webp">
+<link rel="preload" as="image" href="intro-poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060504;--bg2:#0d0b08;
+  --line:rgba(212,164,55,.2);
+  --gold:#e7ad3a;--gold-hi:#f6e2ad;
+  --red:#c8161d;
+  --text:#efe6d2;--muted:#a69a83;
+  /* natural polished-gold text: bright top, darker horizon band, warm bounce */
+  --g:linear-gradient(180deg,#fff6d0 0%,#ffdc7a 32%,#f4b032 55%,#d88a14 72%,#ffd36e 100%);
+  --g-h:linear-gradient(100deg,#b9842c 0%,#e7c06a 25%,#fff1c8 45%,#e9c470 60%,#b57f27 100%);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body.lock{overflow:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+.wrap{width:min(1200px,92%);margin:0 auto;position:relative}
+.gold{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1.gold,h4.gold{line-height:1.45;background-size:100% 1.45em;background-repeat:repeat-y}
+.eyebrow{font-size:.76rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:14px;font-weight:600}
+.eyebrow::before,.eyebrow::after{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));transform:scaleX(0);transition:transform 1.1s var(--ease) .3s}
+.eyebrow::before{transform-origin:right}.eyebrow::after{transform-origin:left;background:linear-gradient(90deg,var(--gold),transparent)}
+.eyebrow.in::before,.eyebrow.in::after{transform:scaleX(1)}
+h2.title{font-family:Cinzel,serif;font-weight:700;font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.15;margin:18px 0 18px}
+.lead{color:var(--muted);font-size:1.06rem;max-width:620px}
+section{position:relative;padding:120px 0}
+.center{text-align:center}.center .lead{margin:0 auto}
+
+/* ---------- animation primitives ---------- */
+.rv{opacity:0;transform:translateY(36px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+.pop{opacity:0;transform:translateY(34px) scale(.86);filter:blur(6px);transition:opacity .8s var(--ease),transform .9s var(--spring),filter .8s var(--ease);transition-delay:var(--d,0s)}
+.rv.in,.pop.in{opacity:1;transform:none;filter:none}
+.words .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em}
+.words .w>span{display:inline-block;transform:translateY(105%) rotate(4deg);transition:transform 1s var(--ease);transition-delay:calc(var(--i)*.07s + .05s)}
+.words.in .w>span{transform:none}
+
+/* Buttons */
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:999px;font-weight:700;font-size:.86rem;letter-spacing:.14em;text-transform:uppercase;transition:transform .35s var(--ease),box-shadow .35s,background .35s,border-color .35s;cursor:pointer;border:0;font-family:inherit;isolation:isolate}
+.btn-gold{background:var(--g-h);color:#1c1205;box-shadow:0 10px 34px -12px rgba(230,170,50,.65),inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(90,55,10,.35)}
+.btn-gold::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-20deg);animation:btnshine 4.5s 2s infinite;z-index:-1}
+@keyframes btnshine{0%,70%{left:-60%}100%{left:130%}}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 18px 44px -12px rgba(230,170,50,.85),inset 0 1px 0 rgba(255,255,255,.6)}
+.btn-ghost{border:1px solid rgba(212,164,55,.35);color:var(--gold-hi);background:rgba(255,255,255,.02)}
+.btn-ghost:hover{border-color:var(--gold);background:rgba(212,164,55,.08);transform:translateY(-2px)}
+
+/* ---------- Intro film ---------- */
+#intro{position:fixed;inset:0;z-index:250;background:#000;display:none;opacity:1;transition:opacity .9s ease}
+.js #intro{display:block}
+#intro.out{opacity:0;pointer-events:none}
+#intro.gone{display:none!important}
+#intro video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+#intro .ibar{position:absolute;left:0;bottom:0;height:2px;width:100%;background:linear-gradient(90deg,#8a5a12,#ffd77a,#fff3c4);transform-origin:left;transform:scaleX(0)}
+#intro .ictl{position:absolute;right:22px;bottom:22px;display:flex;gap:10px;z-index:2;opacity:0;transition:opacity .6s}
+#intro.ready .ictl{opacity:1}
+#intro .ib{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;border:1px solid rgba(231,173,58,.45);background:rgba(6,5,4,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#f6e2ad;font:600 .7rem Manrope,sans-serif;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:background .3s,border-color .3s}
+#intro .ib:hover{background:rgba(231,173,58,.18);border-color:#e7ad3a}
+#intro .ib svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#intro .enter{position:absolute;inset:0;display:none;place-items:center;z-index:3;background:radial-gradient(circle at 50% 45%,rgba(214,150,40,.18),rgba(0,0,0,.85) 60%)}
+#intro.needtap .enter{display:grid}
+#intro .enter button{display:flex;flex-direction:column;align-items:center;gap:18px;background:none;border:0;cursor:pointer;color:#f6e2ad;font:600 .8rem Manrope,sans-serif;letter-spacing:.4em;text-transform:uppercase}
+#intro .enter img{width:min(220px,50vw);height:auto;animation:breathe 2.2s ease-in-out infinite}
+#intro .enter span{padding:14px 34px;border-radius:999px;border:1px solid rgba(231,173,58,.6);background:rgba(231,173,58,.08)}
+@media (max-width:640px){#intro .ictl{right:50%;transform:translateX(50%);bottom:28px}}
+/* ---------- Preloader ---------- */
+#loader{position:fixed;inset:0;z-index:200;display:grid;place-items:center;pointer-events:none}
+html:not(.js) #loader{display:none}
+#loader .cur{position:absolute;left:0;right:0;height:50.5%;background:#050403;transition:transform 1.1s cubic-bezier(.77,0,.18,1)}
+#loader .cur.t{top:0;border-bottom:1px solid rgba(212,164,55,.35)}
+#loader .cur.b{bottom:0}
+#loader .mid{position:relative;z-index:2;text-align:center;transition:opacity .5s,transform .8s var(--ease)}
+#loader .nz-emblem{width:170px;height:auto;margin:0 auto;animation:breathe 2.2s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.04);filter:drop-shadow(0 0 22px rgba(255,180,60,.35))}}
+#loader .bar{width:160px;height:1px;background:rgba(212,164,55,.18);margin:22px auto 0;overflow:hidden}
+#loader .bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,transparent,#f6d98e,transparent);animation:barrun 1.2s ease-in-out infinite}
+@keyframes barrun{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+#loader.done .mid{opacity:0;transform:scale(.9)}
+#loader.done .cur.t{transform:translateY(-101%)}
+#loader.done .cur.b{transform:translateY(101%)}
+@keyframes loaderFail{to{visibility:hidden}}
+#loader.gone{display:none}
+
+/* ---------- Nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .4s,padding .4s,border-color .4s;padding:16px 0;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(6,5,4,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:8px 0;border-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .nz-emblem{width:62px;height:auto}
+.brand .nz-word{width:150px;height:auto}
+.links{display:flex;gap:34px;align-items:center}
+.links a{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:#d8ccb2;position:relative;font-weight:500;transition:color .3s}
+.links a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-6px;height:1px;width:100%;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
+.links a:not(.btn):hover{color:var(--gold-hi)}
+.links a:not(.btn):hover::after{transform:scaleX(1);transform-origin:left}
+.links .btn{padding:11px 22px;font-size:.72rem;color:#1c1205}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:44px;height:44px;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.burger span{width:18px;height:1.5px;background:var(--gold);transition:.3s}
+.burger.x span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.x span:nth-child(2){opacity:0}
+.burger.x span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ---------- Hero ---------- */
+.hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:96px 0 80px;overflow:hidden;position:relative}
+#sparks{position:absolute;inset:0;width:100%;height:100%}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 55% 45% at 50% 38%,rgba(214,150,45,.13),transparent 70%)}
+.beam{position:absolute;top:-20%;width:38vw;height:140%;background:linear-gradient(90deg,transparent,rgba(255,215,140,.06),transparent);transform:rotate(18deg);animation:beam 9s ease-in-out infinite;pointer-events:none}
+.beam.b2{animation-delay:-4.5s;transform:rotate(-16deg)}
+@keyframes beam{0%,100%{left:-30%}50%{left:80%}}
+.corner{position:absolute;pointer-events:none;width:min(420px,40vw);height:auto;opacity:0;transition:opacity 1.6s .4s}
+.loaded .corner{opacity:1}
+.corner.tr{top:0;right:0}
+.corner.bl{bottom:0;left:0;transform:rotate(180deg)}
+.hero .wrap{text-align:center}
+.hero-logo{position:relative;width:min(640px,88vw);margin:0 auto}
+.hero-logo img{display:block;width:100%;height:auto;position:relative}
+.hero-logo .h-emb{width:72%;margin:0 auto}
+.hero-logo .h-word{margin-top:-1%}
+.hero-logo .glow{position:absolute;left:50%;top:34%;width:70%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,170,40,.22),rgba(255,140,20,.06) 45%,transparent 70%);filter:blur(10px);animation:glowp 4s ease-in-out infinite}
+@keyframes glowp{50%{opacity:.65;transform:translate(-50%,-50%) scale(1.08)}}
+.hero-logo::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 42%,rgba(255,250,230,.6) 50%,transparent 58%) no-repeat;background-size:260% 100%;background-position:150% 0;mix-blend-mode:overlay;animation:sweep 6s 3.4s infinite;
+  -webkit-mask:url(emblem.webp) center top/72% auto no-repeat,url(wordmark.webp) center bottom/100% auto no-repeat;mask:url(emblem.webp) center top/72% auto no-repeat,url(wordmark.webp) center bottom/100% auto no-repeat}
+@keyframes sweep{0%{background-position:150% 0}35%,100%{background-position:-60% 0}}
+/* logo intro */
+.hero .h-emb{opacity:0;transform:scale(.82);filter:blur(10px) brightness(1.8)}
+.hero .h-word{opacity:0;transform:translateY(30px);filter:blur(8px)}
+.hero .glow{opacity:0}
+.loaded .hero .h-emb{opacity:1;transform:none;filter:none;transition:opacity 1.1s var(--ease) .1s,transform 1.6s var(--spring) .1s,filter 1.6s var(--ease) .1s}
+.loaded .hero .h-word{opacity:1;transform:none;filter:none;transition:opacity 1s var(--ease) .75s,transform 1.2s var(--ease) .75s,filter 1.2s var(--ease) .75s}
+.loaded .hero .glow{opacity:1;transition:opacity 2s .4s}
+.hero .h-in{opacity:0;transform:translateY(26px)}
+.loaded .hero .h-in{opacity:1;transform:none;transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d)}
+.hero h1{font-family:Cinzel,serif;font-weight:600;font-size:clamp(1.2rem,2.3vw,1.8rem);letter-spacing:.07em;margin-top:14px}
+.hero p.sub{color:var(--muted);max-width:640px;margin:14px auto 0;font-size:1.05rem}
+.hero .cta{display:flex;gap:16px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.cities{margin-top:30px;display:flex;justify-content:center;gap:18px;align-items:center;color:#cbbd9f;font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;flex-wrap:wrap}
+.cities i{width:5px;height:5px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red)}
+.scroll{position:absolute;bottom:26px;left:50%;margin-left:-12px;width:24px;height:40px;border:1px solid var(--line);border-radius:14px}
+.scroll::after{content:"";position:absolute;left:50%;top:8px;width:3px;height:8px;margin-left:-1.5px;border-radius:2px;background:var(--gold);animation:sc 1.8s infinite}
+@keyframes sc{0%{opacity:0;transform:translateY(0)}40%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+
+/* ---------- Marquee ---------- */
+.marquee{border-block:1px solid var(--line);background:linear-gradient(90deg,#0b0906,#140f08,#0b0906);overflow:hidden;padding:22px 0;position:relative}
+.marquee::before,.marquee::after{content:"";position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+.marquee::before{left:0;background:linear-gradient(90deg,#0b0906,transparent)}
+.marquee::after{right:0;background:linear-gradient(-90deg,#0b0906,transparent)}
+.track{display:flex;gap:56px;width:max-content;animation:mq 36s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track span{font-family:Cinzel,serif;font-size:1.3rem;letter-spacing:.14em;white-space:nowrap;display:flex;align-items:center;gap:56px;color:#e6d5ab}
+.track span::after{content:"✦";color:var(--red);font-size:.85rem}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- About ---------- */
+.about-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:80px;align-items:center}
+.about-visual{position:relative;aspect-ratio:1/1;border-radius:28px;overflow:hidden;border:1px solid var(--line);
+  background:radial-gradient(circle at 50% 45%,#24180a,#0a0805 70%)}
+.about-visual .nz-emblem{position:absolute;left:10%;top:16%;width:80%;height:auto;animation:floaty 7s ease-in-out infinite}
+@keyframes floaty{50%{transform:translateY(-12px)}}
+.ring{position:absolute;inset:8%;border-radius:50%;border:1px dashed rgba(212,164,55,.3);animation:rot 50s linear infinite}
+.ring.r2{inset:2%;border-style:solid;border-color:rgba(200,22,29,.2);animation-duration:70s;animation-direction:reverse}
+.ring.r2::before{content:"";position:absolute;top:-4px;left:50%;width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 14px var(--red)}
+@keyframes rot{to{transform:rotate(360deg)}}
+.pill-tag{position:absolute;background:rgba(10,8,5,.85);border:1px solid var(--line);backdrop-filter:blur(6px);padding:10px 16px;border-radius:12px;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-hi);z-index:2}
+.pill-tag.t1{top:8%;left:6%;animation:bob 5s ease-in-out infinite}
+.pill-tag.t2{bottom:9%;right:6%;animation:bob 5s -2.5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+.feat div{border-left:2px solid var(--gold);padding:6px 0 6px 16px;transition:background .3s,border-color .3s}
+.feat div:hover{background:linear-gradient(90deg,rgba(212,164,55,.08),transparent);border-color:var(--red)}
+.feat b{display:block;font-family:Cinzel,serif;font-size:1.04rem;color:var(--gold-hi)}
+.feat span{font-size:.9rem;color:var(--muted)}
+
+/* ---------- Services ---------- */
+.services{background:linear-gradient(180deg,transparent,var(--bg2) 20%,var(--bg2) 80%,transparent)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;perspective:1200px}
+.svc{position:relative;padding:38px 32px 34px;border-radius:22px;background:linear-gradient(160deg,#16110a,#0b0906);border:1px solid var(--line);overflow:hidden;isolation:isolate;transform-style:preserve-3d}
+.svc.in{transition:transform .5s var(--ease),box-shadow .5s,opacity .8s,filter .8s}
+.svc::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(140deg,var(--gold-hi),transparent 40%,transparent 60%,var(--red));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.45s}
+.svc .glare{position:absolute;inset:0;z-index:-1;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(230,180,80,.16),transparent 45%);opacity:0;transition:opacity .4s}
+.svc:hover{box-shadow:0 30px 60px -30px rgba(214,150,40,.45)}
+.svc:hover::before,.svc:hover .glare{opacity:1}
+.ico{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,#2b1d08,#130d05);border:1px solid var(--line);margin-bottom:24px;transition:transform .6s var(--spring)}
+.svc:hover .ico{transform:translateZ(30px) rotate(-8deg) scale(1.08)}
+.ico svg{width:28px;height:28px;stroke:url(#gg);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.svc h3{font-family:Cinzel,serif;font-size:1.28rem;margin-bottom:10px;color:#f4e5bf}
+.svc p{color:var(--muted);font-size:.95rem}
+.svc .num{position:absolute;right:26px;top:22px;font-family:Cinzel,serif;font-size:3.2rem;color:rgba(212,164,55,.08);font-weight:800;line-height:1}
+
+/* ---------- Founder ---------- */
+.founder-card{display:grid;grid-template-columns:.9fr 1.1fr;border-radius:32px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(135deg,#120d07,#070605)}
+.portrait{position:relative;min-height:600px;background:radial-gradient(circle at 50% 38%,#33210a,#0c0905 70%);display:grid;place-items:center;overflow:hidden}
+.portrait .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;transform:scale(1.08);transition:transform 1.6s var(--ease)}
+.founder-card.in .portrait .photo{transform:scale(1)}
+.founder-card:hover .portrait .photo{transform:scale(1.03)}
+.portrait::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,5,4,0) 55%,rgba(6,5,4,.75) 100%),linear-gradient(90deg,transparent 70%,rgba(10,8,5,.55) 100%)}
+.portrait .badge{position:absolute;left:40px;bottom:38px;z-index:2;display:flex;align-items:center;gap:10px;padding:8px 16px 8px 8px;border-radius:999px;background:rgba(8,6,4,.72);border:1px solid rgba(231,173,58,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-hi)}
+.portrait .badge img{width:40px;height:auto}
+.portrait .frame{z-index:2}
+.portrait .frame{position:absolute;inset:26px;border:1px solid rgba(212,164,55,.3);border-radius:20px}
+.portrait .frame::before,.portrait .frame::after{content:"";position:absolute;width:40px;height:40px;border:2px solid var(--gold)}
+.portrait .frame::before{top:-2px;left:-2px;border-right:0;border-bottom:0;border-top-left-radius:20px}
+.portrait .frame::after{bottom:-2px;right:-2px;border-left:0;border-top:0;border-bottom-right-radius:20px}
+.f-body{padding:64px 60px;display:flex;flex-direction:column;justify-content:center}
+.f-body h3{font-family:Cinzel,serif;font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.1;margin:16px 0 8px}
+.roles{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 24px}
+.roles span{padding:7px 16px;border:1px solid var(--line);border-radius:999px;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-hi)}
+.quote{font-family:Cinzel,serif;font-size:1.22rem;line-height:1.5;color:#eadcb8;border-left:2px solid var(--red);padding-left:20px;margin:6px 0 24px}
+.f-body p{color:var(--muted)}
+
+/* ---------- Locations ---------- */
+.loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+.loc{position:relative;border-radius:24px;padding:44px 34px;border:1px solid var(--line);background:#0c0a07;overflow:hidden;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end}
+.loc.in{transition:transform .5s var(--ease),border-color .4s,opacity .8s,filter .8s}
+.loc:hover{border-color:rgba(212,164,55,.55);transform:translateY(-8px)}
+.loc .bg{position:absolute;inset:0;opacity:.55;transition:.6s}
+.loc:hover .bg{opacity:.9;transform:scale(1.06)}
+.loc .code{position:absolute;top:24px;right:28px;font-family:Cinzel,serif;font-size:4rem;font-weight:800;color:rgba(212,164,55,.12);line-height:1;transition:.5s var(--ease)}
+.loc:hover .code{color:rgba(212,164,55,.25);transform:translateY(-4px)}
+.loc h3{font-family:Cinzel,serif;font-size:1.75rem;position:relative}
+.loc p{color:var(--muted);position:relative;font-size:.92rem}
+.loc .pin{position:relative;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(200,22,29,.15);border:1px solid rgba(200,22,29,.5);margin-bottom:18px}
+.loc .pin::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(200,22,29,.4);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{transform:scale(.8);opacity:1}100%{transform:scale(1.5);opacity:0}}
+
+/* ---------- Process ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:64px;position:relative}
+.steps .track-line{position:absolute;top:34px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),var(--red),var(--gold),transparent);opacity:.55;transform:scaleX(0);transform-origin:left;transition:transform 1.8s var(--ease) .2s}
+.steps.in .track-line{transform:scaleX(1)}
+.step{text-align:center;padding:0 10px;position:relative}
+.step .dot{width:68px;height:68px;margin:0 auto 22px;border-radius:50%;display:grid;place-items:center;background:#0d0a06;border:1px solid var(--gold);font-family:Cinzel,serif;font-size:1.3rem;font-weight:700;color:var(--gold-hi);box-shadow:0 0 0 8px var(--bg),0 0 30px rgba(212,164,55,.22);transition:transform .5s var(--spring),background .4s}
+.step:hover .dot{transform:scale(1.12);background:#1b1309}
+.step h4{font-family:Cinzel,serif;font-size:1.12rem;margin-bottom:8px}
+.step p{color:var(--muted);font-size:.9rem}
+
+/* ---------- CTA band ---------- */
+.band{border-radius:32px;padding:70px 50px;text-align:center;position:relative;overflow:hidden;border:1px solid rgba(212,164,55,.38);
+  background:radial-gradient(ellipse at 50% 0%,rgba(214,150,40,.24),transparent 60%),linear-gradient(135deg,#1a1208,#0a0805)}
+.band::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,230,170,.08) 50%,transparent 60%);background-size:250% 100%;animation:sweep 7s infinite}
+.band>*{position:relative}
+.band h2{font-family:Cinzel,serif;font-size:clamp(1.8rem,3.6vw,2.8rem);line-height:1.2;margin-bottom:14px}
+.band p{color:var(--muted);margin-bottom:30px}
+
+/* ---------- Contact ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;margin-top:60px}
+.cinfo{display:flex;flex-direction:column;gap:16px}
+.citem{display:flex;gap:18px;align-items:center;padding:22px 24px;border-radius:18px;border:1px solid var(--line);background:#0c0a07}
+.citem.in{transition:border-color .3s,background .3s,transform .4s var(--ease),opacity .8s,filter .8s}
+.citem:hover{border-color:var(--gold);background:#130f09;transform:translateX(6px)}
+.citem .ci{flex:none;width:50px;height:50px;border-radius:14px;display:grid;place-items:center;background:var(--g-h);box-shadow:0 6px 20px -6px rgba(230,170,50,.55),inset 0 1px 0 rgba(255,255,255,.5)}
+.citem .ci svg{width:22px;height:22px;stroke:#1c1205;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.citem small{display:block;font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.citem b{font-weight:600;font-size:1.04rem;word-break:break-word}
+form{padding:42px;border-radius:24px;border:1px solid var(--line);background:linear-gradient(160deg,#120e08,#090705)}
+form h3{font-family:Cinzel,serif;font-size:1.5rem;margin-bottom:6px}
+form > p{color:var(--muted);font-size:.92rem;margin-bottom:26px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.field input,.field select,.field textarea{width:100%;background:#060504;border:1px solid rgba(212,164,55,.2);border-radius:12px;padding:14px 16px;color:var(--text);font-family:inherit;font-size:.95rem;transition:.25s;outline:none}
+.field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,164,55,.12)}
+.field input.err{border-color:var(--red);box-shadow:0 0 0 4px rgba(200,22,29,.15)}
+.field textarea{min-height:120px;resize:vertical}
+
+/* ---------- Popup (enquiry sent) ---------- */
+.modal{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:20px;background:rgba(3,2,1,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+.modal.open{opacity:1;visibility:visible}
+.modal .box{width:min(440px,100%);text-align:center;padding:40px 32px 34px;border-radius:26px;border:1px solid rgba(212,164,55,.45);background:radial-gradient(ellipse at 50% 0%,rgba(214,150,40,.22),transparent 60%),#0d0a06;box-shadow:0 40px 80px -20px #000;transform:scale(.8) translateY(30px);transition:transform .6s var(--spring)}
+.modal.open .box{transform:none}
+.modal .nz-emblem{width:130px;height:auto;margin:0 auto 10px}
+.modal h4{font-family:Cinzel,serif;font-size:1.5rem;margin-bottom:8px}
+.modal p{color:var(--muted);font-size:.95rem;margin-bottom:24px}
+.modal .acts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+footer{border-top:1px solid var(--line);padding:56px 0 34px;background:#050403}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.foot .flinks{display:flex;gap:24px;flex-wrap:wrap}
+.foot .flinks a{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:#d8ccb2}
+.foot .flinks a:hover{color:var(--gold-hi)}
+.copy{margin-top:34px;padding-top:24px;border-top:1px solid rgba(212,164,55,.1);display:flex;justify-content:space-between;color:#7d725e;font-size:.82rem;flex-wrap:wrap;gap:10px}
+
+.wa{position:fixed;right:22px;bottom:22px;z-index:60;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--g-h);box-shadow:0 10px 30px -6px rgba(230,170,50,.7),inset 0 1px 0 rgba(255,255,255,.5);transform:scale(0);transition:transform .6s var(--spring)}
+.loaded .wa{transform:scale(1);transition-delay:2.2s}
+.wa:hover{transform:scale(1.08)!important;transition-delay:0s}
+.wa::before{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid rgba(240,200,110,.7);animation:pulse 2.6s infinite}
+.wa svg{width:28px;height:28px;fill:#1c1205}
+
+@media (max-width:980px){
+  .links{position:fixed;inset:0;background:rgba(6,5,4,.97);flex-direction:column;justify-content:center;gap:30px;transform:translateX(100%);transition:transform .5s var(--ease)}
+  .links.open{transform:none}
+  .links a{font-size:1rem}
+  .burger{display:flex;z-index:70;position:relative}
+  .about-grid,.founder-card,.contact-grid{grid-template-columns:1fr}
+  .about-grid{gap:50px}
+  .grid3,.loc-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr;row-gap:44px}
+  .steps .track-line{display:none}
+  .portrait{min-height:520px}
+  .f-body{padding:44px 30px}
+}
+@media (max-width:640px){
+  section{padding:84px 0}
+  .grid3,.loc-grid,.feat,.row{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  form{padding:28px 22px}
+  .band{padding:50px 24px}
+  .corner{width:56vw}
+  .brand .nz-emblem{width:50px}
+  .brand .nz-word{width:124px}
+  .hero{padding-top:100px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv,.pop,.hero .h-in,.hero .h-emb,.hero .h-word,.hero .glow{opacity:1!important;transform:none!important;filter:none!important}.words .w>span{transform:none}}
+</style>
+</head>
+<body class="lock">
+
+<!-- shared SVG definitions for every logo instance -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff0b8"/><stop offset=".5" stop-color="#e2b04a"/><stop offset="1" stop-color="#a66f1a"/>
+    </linearGradient>
+    <linearGradient id="cg" x1="0" x2="1"><stop offset="0" stop-color="#d4a346" stop-opacity="0"/><stop offset="1" stop-color="#f6dc9a"/></linearGradient>
+
+  </defs>
+</svg>
+
+<!-- INTRO FILM -->
+<div id="intro" aria-label="Next Zone Entertainment intro">
+  <video id="introVid" playsinline muted preload="auto" poster="intro-poster.jpg"></video>
+  <div class="ibar" id="ibar"></div>
+  <div class="ictl">
+    <button class="ib" id="iSound" type="button"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M23 9l-6 6M17 9l6 6"/></svg><span>Sound</span></button>
+    <button class="ib" id="iSkip" type="button">Skip<svg viewBox="0 0 24 24"><path d="M5 4l10 8-10 8z"/><path d="M19 5v14"/></svg></button>
+  </div>
+  <div class="enter"><button id="iEnter" type="button"><img src="emblem.webp" alt=""><span>Enter</span></button></div>
+</div>
+
+<!-- PRELOADER -->
+<div id="loader" aria-hidden="true">
+  <div class="cur t"></div><div class="cur b"></div>
+  <div class="mid"><img class="nz-emblem" src="emblem_sm.webp" alt="" width="260" height="191"><div class="bar"><i></i></div></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="wrap">
+    <a href="#home" class="brand" aria-label="Next Zone Entertainment home">
+      <img class="nz-emblem" src="emblem_sm.webp" alt="" width="260" height="191"><img class="nz-word" src="wordmark_sm.webp" alt="Next Zone Entertainment" width="420" height="83">
+    </a>
+    <div class="links" id="links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#founder">Founder</a>
+      <a href="#presence">Presence</a>
+      <a href="#contact" class="btn btn-gold">Let's Talk</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+  <canvas id="sparks"></canvas>
+  <div class="beam"></div><div class="beam b2"></div>
+  <svg class="corner tr" viewBox="0 0 420 260" fill="none">
+    <path d="M120 0 L420 260" stroke="url(#cg)" stroke-width="2"/>
+    <path d="M190 0 L420 200" stroke="url(#cg)" stroke-width="1" opacity=".6"/>
+    <path d="M250 0 L420 148" stroke="url(#cg)" stroke-width="1" opacity=".4"/>
+    <path d="M300 0 L420 104 L420 0Z" fill="url(#cg)" opacity=".12"/>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 420 260" fill="none">
+    <path d="M120 0 L420 260" stroke="url(#cg)" stroke-width="2"/>
+    <path d="M190 0 L420 200" stroke="url(#cg)" stroke-width="1" opacity=".6"/>
+    <path d="M300 0 L420 104 L420 0Z" fill="url(#cg)" opacity=".12"/>
+  </svg>
+  <div class="wrap">
+    <div class="hero-logo">
+      <div class="glow"></div>
+      <img class="h-emb" src="emblem.webp" alt="" width="1100" height="809" fetchpriority="high">
+      <img class="h-word" src="wordmark.webp" alt="Next Zone Entertainment" width="1700" height="337" fetchpriority="high">
+    </div>
+    <h1 class="gold h-in" style="--d:1.3s">Where Stories Step Into The Spotlight</h1>
+    <p class="sub h-in" style="--d:1.45s">Films, web series, music videos, live events and talent — crafted with cinematic ambition and delivered across borders.</p>
+    <div class="cta h-in" style="--d:1.6s">
+      <a href="#contact" class="btn btn-gold">Start a Project
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#services" class="btn btn-ghost">Explore Work</a>
+    </div>
+    <div class="cities h-in" style="--d:1.75s"><span>Mumbai</span><i></i><span>Abu Dhabi</span><i></i><span>Greece</span></div>
+  </div>
+  <div class="scroll"></div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Feature Films</span><span>Web Series</span><span>Music Videos</span><span>Live Events</span><span>Artist Management</span><span>Brand Films</span><span>Casting</span>
+    <span>Feature Films</span><span>Web Series</span><span>Music Videos</span><span>Live Events</span><span>Artist Management</span><span>Brand Films</span><span>Casting</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-visual pop">
+      <div class="ring"></div><div class="ring r2"></div>
+      <img class="nz-emblem" src="emblem.webp" alt="" width="1100" height="809" decoding="async">
+      <div class="pill-tag t1">Est. in Mumbai</div>
+      <div class="pill-tag t2">Global Reach</div>
+    </div>
+    <div>
+      <span class="eyebrow rv">About Us</span>
+      <h2 class="title words">Entertainment<br><span class="gold">Without Borders</span></h2>
+      <p class="lead rv">Next Zone Entertainment is a creative powerhouse built for the next era of storytelling. From the heart of Mumbai to Abu Dhabi and Greece, we bring ideas to life on screen and on stage — with the polish of cinema and the energy of live entertainment.</p>
+      <p class="lead rv" style="margin-top:14px">Led by an actor who understands both sides of the camera, we partner with brands, artists and producers who want work that people remember.</p>
+      <div class="feat stagger">
+        <div class="pop"><b>Cinematic Craft</b><span>Premium production values on every frame</span></div>
+        <div class="pop"><b>Artist-First</b><span>Run by a performer, built for performers</span></div>
+        <div class="pop"><b>Multi-Country</b><span>Teams in India, UAE &amp; Europe</span></div>
+        <div class="pop"><b>End-to-End</b><span>From concept to premiere night</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <div class="wrap center">
+    <span class="eyebrow rv">What We Do</span>
+    <h2 class="title words">Our <span class="gold">Zones</span> of Expertise</h2>
+    <p class="lead rv">Six disciplines, one standard — gold.</p>
+    <div class="grid3 stagger" style="text-align:left">
+      <div class="svc pop"><div class="glare"></div><div class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg></div><h3>Film Production</h3><p>Feature films and short films — development, shoot and post, handled with a director's eye.</p><span class="num">01</span></div>
+      <div class="svc pop"><div class="glare"></div><div class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4M10 8.5v5l4-2.5z"/></svg></div><h3>Web Series &amp; OTT</h3><p>Binge-worthy series and digital originals made for streaming platforms and modern audiences.</p><span class="num">02</span></div>
+      <div class="svc pop"><div class="glare"></div><div class="ico"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><h3>Music Videos</h3><p>High-impact visuals for singles and albums, from concept and choreography to final grade.</p><span class="num">03</span></div>
+      <div class="svc pop"><div class="glare"></div><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z"/></svg></div><h3>Live Events &amp; Shows</h3><p>Concerts, award nights, celebrity appearances and destination events — staged to dazzle.</p><span class="num">04</span></div>
+      <div class="svc pop"><div class="glare"></div><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><h3>Artist Management</h3><p>Career guidance, casting and representation for actors, models and performers.</p><span class="num">05</span></div>
+      <div class="svc pop"><div class="glare"></div><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 11l15-6v14L3 13z"/><path d="M7 13v5a2 2 0 004 0v-4"/><path d="M21 9v4"/></svg></div><h3>Brand Films &amp; Ads</h3><p>Commercials and branded content that put your brand in the spotlight it deserves.</p><span class="num">06</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section id="founder">
+  <div class="wrap">
+    <div class="founder-card pop">
+      <div class="portrait">
+        <img class="photo" src="shafaque.webp" alt="Shafaque Kazmi, Managing Director and Actor, Next Zone Entertainment" width="900" height="1200" loading="lazy">
+        <div class="badge"><img src="emblem_sm.webp" alt="">Founder · MD</div>
+        <div class="frame"></div>
+      </div>
+      <div class="f-body">
+        <span class="eyebrow rv" style="align-self:flex-start">The Visionary</span>
+        <h3 class="gold words">Shafaque Kazmi</h3>
+        <div class="roles stagger"><span class="pop">Managing Director</span><span class="pop">Actor</span></div>
+        <p class="quote rv">"Every great story deserves a stage worthy of it. Next Zone is that stage."</p>
+        <p class="rv">As both the face in front of the camera and the force behind the company, Shafaque Kazmi leads Next Zone Entertainment with a performer's instinct and a producer's discipline — building a home for bold ideas across India, the Middle East and Europe.</p>
+        <div class="rv" style="margin-top:30px"><a href="#contact" class="btn btn-gold">Connect with Shafaque</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESENCE -->
+<section id="presence" style="padding-top:40px">
+  <div class="wrap center">
+    <span class="eyebrow rv">Global Presence</span>
+    <h2 class="title words">Three Cities. <span class="gold">One Zone.</span></h2>
+    <p class="lead rv">Wherever your story belongs, we're already there.</p>
+    <div class="loc-grid stagger" style="text-align:left">
+      <div class="loc pop">
+        <div class="bg" style="background:radial-gradient(circle at 80% 20%,rgba(214,150,40,.32),transparent 60%)"></div>
+        <span class="code">BOM</span>
+        <div class="pin"><svg width="16" height="16" viewBox="0 0 24 24" fill="#e33"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg></div>
+        <h3 class="gold">Mumbai</h3><p>India · Headquarters &amp; the heart of Indian cinema</p>
+      </div>
+      <div class="loc pop">
+        <div class="bg" style="background:radial-gradient(circle at 80% 20%,rgba(200,22,29,.28),transparent 60%)"></div>
+        <span class="code">AUH</span>
+        <div class="pin"><svg width="16" height="16" viewBox="0 0 24 24" fill="#e33"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg></div>
+        <h3 class="gold">Abu Dhabi</h3><p>UAE · Events, shows &amp; Middle-East productions</p>
+      </div>
+      <div class="loc pop">
+        <div class="bg" style="background:radial-gradient(circle at 80% 20%,rgba(255,226,154,.22),transparent 60%)"></div>
+        <span class="code">GR</span>
+        <div class="pin"><svg width="16" height="16" viewBox="0 0 24 24" fill="#e33"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg></div>
+        <h3 class="gold">Greece</h3><p>Europe · Scenic locations &amp; international shoots</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section style="padding-top:40px">
+  <div class="wrap center">
+    <span class="eyebrow rv">How We Work</span>
+    <h2 class="title words">From Idea to <span class="gold">Premiere</span></h2>
+    <div class="steps stagger rv">
+      <div class="track-line"></div>
+      <div class="step pop"><div class="dot">01</div><h4>Concept</h4><p>We listen, then shape your idea into a story worth telling.</p></div>
+      <div class="step pop"><div class="dot">02</div><h4>Pre-Production</h4><p>Script, casting, locations and planning — every detail locked.</p></div>
+      <div class="step pop"><div class="dot">03</div><h4>Production</h4><p>Lights, camera, action — on set or on stage, anywhere in the world.</p></div>
+      <div class="step pop"><div class="dot">04</div><h4>Release</h4><p>Post, delivery and launch — your work, in the spotlight.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section style="padding-top:20px;padding-bottom:40px">
+  <div class="wrap">
+    <div class="band pop">
+      <h2>Ready to Enter <span class="gold">The Next Zone?</span></h2>
+      <p>Tell us about your film, show, event or brand — let's create something unforgettable.</p>
+      <a href="#contact" class="btn btn-gold">Book a Conversation</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow rv">Contact</span>
+      <h2 class="title words">Let's Make It <span class="gold">Happen</span></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="cinfo stagger">
+        <a class="citem pop" href="tel:+917008341767"><div class="ci"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></div><div><small>Call</small><b>+91 70083 41767</b></div></a>
+        <a class="citem pop" href="tel:+919692201733"><div class="ci"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></div><div><small>Call</small><b>+91 96922 01733</b></div></a>
+        <a class="citem pop" href="mailto:nextzoneentertainment@gmail.com"><div class="ci"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></div><div><small>Email</small><b>nextzoneentertainment@gmail.com</b></div></a>
+        <div class="citem pop"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div><div><small>Offices</small><b>Mumbai &nbsp;|&nbsp; Abu Dhabi &nbsp;|&nbsp; Greece</b></div></div>
+      </div>
+      <form id="form" class="pop" novalidate>
+        <h3 class="gold">Send an Enquiry</h3>
+        <p>Fill this in and we'll take it to WhatsApp with your message ready to send.</p>
+        <div class="row">
+          <div class="field"><label for="n">Name</label><input id="n" autocomplete="name" placeholder="Your name"></div>
+          <div class="field"><label for="p">Phone</label><input id="p" type="tel" autocomplete="tel" placeholder="+91 ..."></div>
+        </div>
+        <div class="field"><label for="t">I'm interested in</label>
+          <select id="t"><option>Film Production</option><option>Web Series &amp; OTT</option><option>Music Video</option><option>Live Event / Show</option><option>Artist Management</option><option>Brand Film / Ad</option><option>Something else</option></select></div>
+        <div class="field"><label for="m">Message</label><textarea id="m" placeholder="Tell us about your project..."></textarea></div>
+        <button class="btn btn-gold" type="submit" style="width:100%;justify-content:center">Send via WhatsApp</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a href="#home" class="brand"><img class="nz-emblem" src="emblem_sm.webp" alt="" width="260" height="191"><img class="nz-word" src="wordmark_sm.webp" alt="Next Zone Entertainment" width="420" height="83"></a>
+      <div class="flinks"><a href="#about">About</a><a href="#services">Services</a><a href="#founder">Founder</a><a href="#contact">Contact</a></div>
+    </div>
+    <div class="copy"><span>© <span id="yr"></span> Next Zone Entertainment. All rights reserved.</span><span>Mumbai · Abu Dhabi · Greece</span></div>
+  </div>
+</footer>
+
+<!-- enquiry popup -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mh">
+  <div class="box">
+    <img class="nz-emblem" src="emblem_sm.webp" alt="" width="260" height="191">
+    <h4 class="gold" id="mh">Message Ready</h4>
+    <p>Tap below to open WhatsApp and send it to Next Zone Entertainment.</p>
+    <div class="acts">
+      <a class="btn btn-gold" id="waGo" href="https://wa.me/917008341767" target="_blank" rel="noopener">Open WhatsApp</a>
+      <button class="btn btn-ghost" id="mClose" type="button">Close</button>
+    </div>
+  </div>
+</div>
+
+<a class="wa" href="https://wa.me/917008341767" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.300.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1121.8 12 9.8 9.8 0 0112 21.8zM12 0a12 12 0 00-10.4 18L0 24l6.2-1.6A12 12 0 1012 0z"/></svg>
+</a>
+
+<script>
+(function(){
+  var $=function(s,c){return (c||document).querySelector(s)},$$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+  $('#yr').textContent=new Date().getFullYear();
+
+  /* split headings into animated words (keeps inner gold spans) */
+  $$('.words').forEach(function(h){
+    var i=0;
+    (function walk(node){
+      $$( '*',node).length; // no-op
+      Array.prototype.slice.call(node.childNodes).forEach(function(ch){
+        if(ch.nodeType===3){
+          var frag=document.createDocumentFragment();
+          ch.textContent.split(/(\s+)/).forEach(function(t){
+            if(!t)return;
+            if(/^\s+$/.test(t)){frag.appendChild(document.createTextNode(' '));return}
+            var w=document.createElement('span');w.className='w';
+            var s=document.createElement('span');s.textContent=t;s.style.setProperty('--i',i++);
+            if(node.classList&&node.classList.contains('gold')){s.className='gold'}
+            w.appendChild(s);frag.appendChild(w);
+          });
+          node.replaceChild(frag,ch);
+        }else if(ch.nodeType===1&&ch.tagName!=='BR'){walk(ch)}
+      });
+    })(h);
+    // gold spans: move gradient onto word spans so clipping works
+    $$('span.gold',h).forEach(function(g){if(g.querySelector('.w'))g.classList.remove('gold')});
+  });
+
+  /* stagger children */
+  $$('.stagger').forEach(function(p){$$('.pop',p).forEach(function(el,k){el.style.setProperty('--d',(k*0.11)+'s')})});
+
+  /* reveal on scroll */
+  var targets=$$('.rv,.pop,.words,.eyebrow');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    targets.forEach(function(el){io.observe(el)});
+  }else{targets.forEach(function(el){el.classList.add('in')})}
+
+  /* preloader -> hero intro */
+  var loader=$('#loader'),started=false;
+  function start(){
+    if(started)return;started=true;
+    loader.classList.add('done');document.body.classList.remove('lock');
+    setTimeout(function(){document.body.classList.add('loaded')},350);
+    setTimeout(function(){loader.classList.add('gone')},1400);
+  }
+  var fonts=(document.fonts&&document.fonts.ready)?document.fonts.ready:Promise.resolve();
+  var imgs=Promise.all(['.h-emb','.h-word'].map(function(q){var i=$(q);return (i.decode?i.decode():Promise.resolve()).catch(function(){})}));
+
+  /* intro film: plays in full once per visit, then the site opens */
+  var introDone=new Promise(function(resolve){
+    var box=$('#intro'),v=$('#introVid'),bar=$('#ibar'),done=false,seen=false;
+    try{seen=sessionStorage.getItem('nzIntroSeen')==='1'}catch(e){}
+    function finish(){
+      if(done)return;done=true;
+      try{sessionStorage.setItem('nzIntroSeen','1')}catch(e){}
+      box.classList.add('out');
+      setTimeout(function(){box.classList.add('gone');try{v.pause()}catch(e){}},950);
+      resolve();
+    }
+    if(seen||!v.canPlayType||!v.canPlayType('video/mp4')){box.classList.add('gone');resolve();return}
+    v.src=(Math.max(innerWidth,innerHeight)<=900?'intro-720.mp4':'intro.mp4');
+    v.addEventListener('ended',finish);
+    v.addEventListener('error',finish);
+    v.addEventListener('playing',function(){box.classList.add('ready');box.classList.remove('needtap')});
+    v.addEventListener('timeupdate',function(){if(v.duration)bar.style.transform='scaleX('+(v.currentTime/v.duration)+')'});
+    $('#iSkip').onclick=finish;
+    var snd=$('#iSound');
+    function paintSound(){snd.querySelector('span').textContent=v.muted?'Sound':'Mute';snd.querySelector('svg').innerHTML=v.muted?'<path d="M11 5L6 9H2v6h4l5 4z"/><path d="M23 9l-6 6M17 9l6 6"/>':'<path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/>'}
+    snd.onclick=function(){v.muted=!v.muted;paintSound();if(v.paused)v.play().catch(function(){})};
+    $('#iEnter').onclick=function(){v.muted=false;paintSound();v.play().then(function(){box.classList.remove('needtap')}).catch(finish)};
+    var p=v.play();
+    if(p&&p.catch)p.catch(function(){box.classList.add('needtap')});
+    /* safety nets: never trap a visitor behind a stalled video */
+    var stall=setTimeout(function(){if(v.currentTime===0&&!box.classList.contains('needtap'))box.classList.add('needtap')},6000);
+    v.addEventListener('playing',function(){clearTimeout(stall)});
+    var cap=setInterval(function(){if(done){clearInterval(cap);return}if(v.duration&&v.currentTime>=v.duration-0.05)finish()},500);
+  });
+  Promise.all([introDone,fonts,imgs]).then(function(){setTimeout(start,250)});
+  introDone.then(function(){setTimeout(start,3000)});
+
+  /* nav */
+  var nav=$('#nav');
+  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>40)},{passive:true});
+  var links=$('#links'),burger=$('#burger');
+  burger.onclick=function(){links.classList.toggle('open');burger.classList.toggle('x')};
+  $$('a',links).forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open');burger.classList.remove('x')})});
+
+  /* 3D tilt + glare on service cards (pointer devices only) */
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+    $$('.svc').forEach(function(c){
+      c.addEventListener('mousemove',function(e){
+        var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+        c.style.transform='translateY(-6px) rotateX('+((.5-y)*10)+'deg) rotateY('+((x-.5)*12)+'deg)';
+        c.style.setProperty('--mx',x*100+'%');c.style.setProperty('--my',y*100+'%');
+      });
+      c.addEventListener('mouseleave',function(){c.style.transform=''});
+    });
+    /* subtle parallax on hero logo */
+    var hl=$('.hero-logo');
+    addEventListener('mousemove',function(e){
+      var x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;
+      hl.style.transform='translate('+(x*-14)+'px,'+(y*-10)+'px)';
+    });
+  }
+
+  /* form -> whatsapp popup */
+  var modal=$('#modal');
+  function closeM(){modal.classList.remove('open')}
+  $('#mClose').onclick=closeM;
+  modal.addEventListener('click',function(e){if(e.target===modal)closeM()});
+  addEventListener('keydown',function(e){if(e.key==='Escape')closeM()});
+  $('#waGo').addEventListener('click',function(){setTimeout(closeM,300)});
+  $('#form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=$('#n');
+    if(!n.value.trim()){n.classList.add('err');n.focus();n.placeholder='Please enter your name';return}
+    n.classList.remove('err');
+    var v=function(id){return $(id).value.trim()};
+    var msg='Hello Next Zone Entertainment!\n\nName: '+v('#n')+(v('#p')?'\nPhone: '+v('#p'):'')+'\nInterested in: '+v('#t')+(v('#m')?'\n\n'+v('#m'):'');
+    $('#waGo').href='https://wa.me/917008341767?text='+encodeURIComponent(msg);
+    modal.classList.add('open');
+  });
+  $('#n').addEventListener('input',function(){this.classList.remove('err')});
+
+  /* gold dust */
+  (function(){
+    var c=$('#sparks'),x=c.getContext('2d'),w,h,ps=[];
+    var dpr=Math.min(window.devicePixelRatio||1,2);
+    function rs(){w=c.offsetWidth;h=c.offsetHeight;c.width=w*dpr;c.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
+    rs();addEventListener('resize',rs);
+    var N=matchMedia('(max-width:640px)').matches?40:80;
+    for(var i=0;i<N;i++)ps.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.3,vy:-(Math.random()*.35+.08),vx:(Math.random()-.5)*.18,a:Math.random()*6,s:Math.random()*.02+.005});
+    var visible=true;
+    new IntersectionObserver(function(e){visible=e[0].isIntersecting}).observe(c);
+    (function f(){
+      if(visible){
+        x.clearRect(0,0,w,h);
+        for(var i=0;i<ps.length;i++){var p=ps[i];p.x+=p.vx;p.y+=p.vy;p.a+=p.s;if(p.y<-10){p.y=h+10;p.x=Math.random()*w}
+          var o=((Math.sin(p.a)+1)/2)*.7+.08;
+          var g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);
+          g.addColorStop(0,'rgba(255,226,150,'+o+')');g.addColorStop(1,'rgba(255,190,80,0)');
+          x.fillStyle=g;x.beginPath();x.arc(p.x,p.y,p.r*4,0,7);x.fill();}
+      }
+      requestAnimationFrame(f);
+    })();
+  })();
+})();
+</script>
+</body>
+</html>
